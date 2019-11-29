@@ -21,7 +21,15 @@ def display_page(pathname):
     if not isinstance(pathname, str):
         return '404'
 
-    path_vars = re.search(path_match, pathname).groupdict()
+    if pathname is None:
+        return area_select.layout
+
+    path_vars = re.search(path_match, pathname)
+
+    if path_vars is None:
+        return area_select.layout
+    
+    path_vars = path_vars.groupdict()
     page_type = path_vars.get('page_type')
     area_code = path_vars.get('area_code')
     sub_page = path_vars.get('sub_page')
