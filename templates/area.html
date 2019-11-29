@@ -1,0 +1,41 @@
+<!doctype html>
+<head>
+    <title>Hello from Flask</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+</head>
+<body>
+    <h1>{{ area.name }}</h2>
+    <h2>{{ area.code }} | {{ area.type }}</h1>
+    <p>{{ all.charities }} charities</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Financial Year</th>
+                <th>Income</th>
+                <th>Spending</th>
+                <th>Charities</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fy, d in all.financial.items() %}
+            <tr>
+                <td>{{ fy }}</td>
+                <td>{{ d.income }}</td>
+                <td>{{ d.spending }}</td>
+                <td>{{ d.registered }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <canvas id="financialChart" width="400" height="400"></canvas>
+    <script>
+    var myLineChart = new Chart('financialChart', {
+        type: 'line',
+        data: {
+            datasets: [{}]
+        },
+        options: options
+    });
+    </script>
+</body>

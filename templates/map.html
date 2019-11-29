@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<title>{{area.name}}</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.min.css" integrity="sha256-p0ab5p0FrFs9Tz4OZgifAvIP+Rd0VFUEbNYjVXVeh9w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo|Raleway" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.groupedlayercontrol.css')}}" />
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* fonts */
+        .leaflet-control-layers-group-name {
+            font-family: 'Archivo', sans-serif;
+            font-weight: bold;
+        }
+        .marker-cluster div {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* marker-clusters */
+        .marker-cluster-small {
+            background-color: #B2DF00
+        }
+        .marker-cluster-small div {
+            background-color: #B2DF00
+        }
+        .marker-cluster-medium {
+            background-color: #FFFF00
+        }
+        .marker-cluster-medium div {
+            background-color: #FFFF00
+        }
+        .marker-cluster-large div {
+            background-color: #FFA388
+        }
+        .marker-cluster-large {
+            background-color: #FFA388
+        }
+
+        /* minimap styling */
+        .leaflet-control-minimap {
+            background: transparent;
+            box-shadow: none;
+            border: 0;
+        }
+    </style>
+
+	
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var access_token = {{access_token|tojson}};
+        var boundary_geo = {{boundary|tojson}};
+        var boundary_lsoa_geo = {{lsoa_boundary|tojson}};
+        var boundary_ward_geo = {{ward_boundary|tojson}};
+        var lsoa_fill = {{lsoa_fill|tojson}};
+        var markers = {{markers|tojson}};
+    </script>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.snogylop@0.4.0/src/leaflet.snogylop.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.min.js" integrity="sha256-Hb/f1FMaLV+Qn6KSYbc92GxB2bcKp7/efxNeiduEo3g=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/leaflet.groupedlayercontrol.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/map.js')}}"></script>
+</body>
+</html>

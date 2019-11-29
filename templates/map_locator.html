@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+        .leaflet-container {
+            background-color:rgba(255,0,0,0.0);
+        }
+    </style>
+
+	
+</head>
+<body>
+
+
+
+<div id="map"></div>
+<script>
+
+    var boundary_geo = {{boundary|tojson}};
+    var pconBoundary = L.geoJSON(boundary_geo);
+
+    fetch('https://opendata.arcgis.com/datasets/629c303e07ee4ad09a4dfd0bfea499ec_0.geojson')
+        .then(r => r.json())
+        .then(ukboundary => {
+            
+            var map = L.map('map', {
+                maxBounds: bounds,
+                zoomSnap: 0.1,
+                zoomControl: false,
+                attributionControl: false,
+            });
+            map.dragging.disable();
+            map.touchZoom.disable();
+            map.doubleClickZoom.disable();
+            map.scrollWheelZoom.disable();
+            map.boxZoom.disable();
+            map.keyboard.disable();
+            if (map.tap) map.tap.disable();
+            document.getElementById('map').style.cursor='default';
+            var cm;
+
+            var ukboundaryLayer = L.geoJSON(ukboundary, {
+                style: {
+                    stroke: false,
+                    color: 'rgb(204, 204, 204)',
+                    weight: 1,
+                    lineCap: 'butt',
+                    lineJoin: 'miter',
+                    fill: true,
+                    fillColor: 'rgb(204, 204, 204)',
+                    fillOpacity: 1,
+
+                }
+            });
+            var bounds = ukboundaryLayer.getBounds();
+            ukboundaryLayer.addTo(map);
+            map.fitBounds(bounds);
+
+            pconBoundary.setStyle({
+                stroke: true,
+                color: '#FFA388',
+                fill: true,
+                fillColor: '#FFA388',
+                fillOpacity: 1,
+                weight: 1,
+            }).addTo(map)
+            cm = L.circleMarker(pconBoundary.getBounds().getCenter());
+            cm.setStyle({
+                stroke: true,
+                color: '#0D8000',
+                fill: true,
+                fillColor: '#FFFF00',
+                fillOpacity: 1,
+                weight: 3,
+                radius: 4,
+            });
+            cm.addTo(map);
+        });
+
+</script>
+
+
+
+</body>
+</html>
