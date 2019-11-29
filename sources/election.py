@@ -117,7 +117,7 @@ class ElectionData(DataPage):
                 html.Li(
                     className='f6 mv1 lh-copy cf pa2 bg-light-gray near-black',
                     children=[
-                        html.Img(className='w3 fr',
+                        html.Img(className='w3 fr person-photo',
                                  src=c["image_url"]) if c["image_url"] else None,
                         html.Span(className='f5 b', children=c["name"]),
                         html.Br(),
@@ -139,7 +139,7 @@ class ElectionData(DataPage):
                     'color': '#fff',
                 },
                 children=[
-                    html.Img(className='fr w3', src=self.data['photo_url']),
+                    html.Img(className='fr w3 person-photo', src=self.data['photo_url']),
                     html.P(className='pa0 ma0', children='Current MP'),
                     html.P(className='pa0 ma0', children=[
                         html.Strong(className='f3 lh-copy pa0 ma0 calistoga',
