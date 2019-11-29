@@ -18,4 +18,5 @@ app = dash.Dash(
     server=server,
     external_stylesheets=external_stylesheets,
 )
+app.title = 'Area Profiles'
 app.config.suppress_callback_exceptions = True
