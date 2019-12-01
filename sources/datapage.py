@@ -81,6 +81,19 @@ class DataPage:
     def map_params(self, request):
         return dict()
 
+    def attribution(self):
+        return dcc.Markdown()
+
+    def boundary_attribution(self):
+        return dcc.Markdown('''
+### Boundary data
+
+- Source: Office for National Statistics licensed under the Open Government Licence v.3.0
+- Contains OS data © Crown copyright and database right 2019
+
+© 2019 [David Kane](https://dkane.net)
+        ''')
+
     @staticmethod
     def show_figure(children, caption=None):
         if not isinstance(children, list):

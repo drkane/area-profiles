@@ -129,6 +129,14 @@ class CharityData(DataPage):
             self._fig_spendingchart(),
         ]
 
+    def attribution(self):
+        return dcc.Markdown('''
+- from the [Charity Commission](https://beta.charitycommission.gov.uk/), [OSCR](https://www.oscr.org.uk/) 
+  and [CCNI](https://www.charitycommissionni.org.uk/). 
+- Also includes [some of my own data](https://github.com/drkane/charity-lookups) on charities.
+            ''')
+
+
     def map(self):
         return html.Figure(className='ma0 pa0 h-100', children=[
             # html.Figcaption('Map of charities'),

@@ -21,6 +21,10 @@ def layout(area_code, subpage=None):
                 dcc.Store(id='subpage', data=subpage),
                 html.Div(className='fl w-100 w-third-ns pa2', children=[
                     html.Div(id='main-display'),
+                    html.Div(className='bg-light-gray pa2', children=[
+                        html.H3(className='mv2 pa0 f4 header-font b', children='Data sources'),
+                        html.Div(id='attribution'),
+                    ]),
                 ]),
                 html.Div(className='fl w-100 w-two-thirds-ns pa2 flex-auto', children=[
                     html.Div(id='map-display', className='h-100')
@@ -34,7 +38,8 @@ def layout(area_code, subpage=None):
 @app.callback(
     [Output('area-header', 'children'),
      Output('main-display', 'children'),
-     Output('map-display', 'children'),],
+     Output('map-display', 'children'),
+     Output('attribution', 'children'),],
     [Input('area', 'data'),
      Input('subpage', 'data')])
 def display_value(area, subpage):
@@ -45,4 +50,8 @@ def display_value(area, subpage):
         data.header(),
         data.sidebar(),
         data.map(),
+        [
+            data.attribution(),
+            data.boundary_attribution(),
+        ]
     )

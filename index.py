@@ -10,7 +10,7 @@ from apps import area, area_select
 
 app.layout = html.Div(id='container', className='home w-100 sans-serif near-black base-font bg-wavy h-100', children=[
     dcc.Location(id='url', refresh=False),
-    html.Div(id='page-content', className='h-100 flex flex-column')
+    html.Div(id='page-content', className='h-100 flex flex-column'),
 ])
 
 

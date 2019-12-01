@@ -146,6 +146,11 @@ class CompanyData(DataPage):
             self._largest_companies(c),
         ]
 
+    def attribution(self):
+        return dcc.Markdown('''
+- sourced from the [gender pay gap data](https://gender-pay-gap.service.gov.uk/) released by government
+            ''')
+
     def map(self):
         return html.Figure(className='ma0 pa0 h-100', children=[
             # html.Figcaption('Map of companies'),

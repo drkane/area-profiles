@@ -144,6 +144,11 @@ class DeprivationData(DataPage):
             )
         return {}
 
+    def attribution(self):
+        return dcc.Markdown('''
+- the [Index of Multiple Deprivation](https://www.gov.uk/government/statistics/english-indices-of-deprivation-2019) published by MHCLG
+            ''')
+
 
     @classmethod
     def import_data(cls, datadir=None):

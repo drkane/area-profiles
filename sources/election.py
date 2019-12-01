@@ -174,6 +174,14 @@ class ElectionData(DataPage):
             ),
         ])
 
+    def attribution(self):
+        return dcc.Markdown('''
+- constituency data from [Alasdair Rae](https://github.com/alasdairrae/wpc/), which is sourced from a number of places
+  including the Parliamentary Digital Service, House of Commons Library and mysociety & Democracy Club.
+- MP photos are published by the Parliamentary Digital Service and used under a Creative Commons licence.
+- candidates for the 2019 election are sourced from Democracy Club's amazing effort to [source open election data](https://candidates.democracyclub.org.uk/).
+            ''')
+
     @classmethod
     def import_data(cls, datadir=None):
         import pandas as pd

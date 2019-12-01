@@ -60,7 +60,7 @@ Data is used under open licences from a variety of places:
 ### Election data
 
 - constituency data from [Alasdair Rae](https://github.com/alasdairrae/wpc/), which is sourced from a number of places
-  including the Parlimanetary Digital Service, House of Commons Library and mysociety & Democracy Club.
+  including the Parliamentary Digital Service, House of Commons Library and mysociety & Democracy Club.
 - candidates for the 2019 election are sourced from Democracy Club's amazing effort to [source open election data](https://candidates.democracyclub.org.uk/).
 
 ### Deprivation data
@@ -71,7 +71,7 @@ Data is used under open licences from a variety of places:
 
 - from the [Charity Commission](https://beta.charitycommission.gov.uk/), [OSCR](https://www.oscr.org.uk/) 
   and [CCNI](https://www.charitycommissionni.org.uk/). 
-  Also includes [some of my own data](https://github.com/drkane/charity-lookups) on charities.
+- Also includes [some of my own data](https://github.com/drkane/charity-lookups) on charities.
 
 ### Companies data
 
