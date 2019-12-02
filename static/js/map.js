@@ -78,8 +78,8 @@ if (markers && (Object.keys(markers).length > 0)){
     var add_first = true;
     for(const i in markers){
         var markerLayer = L.markerClusterGroup().addLayers(
-            Object.values(markers[i]).map(o => L.marker([o['lat'], o['long']]))
-        )
+            Object.values(markers[i]).map(o => L.marker([o['lat'], o['long']]).bindPopup(o['name']))
+        );
         if(add_first){
             markerLayer.addTo(map);
         }
