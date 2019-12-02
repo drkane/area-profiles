@@ -1,6 +1,9 @@
+import os
+import json
+
 import dash_core_components as dcc
 import dash_html_components as html
-# import plotly.graph_objs as go
+import plotly.graph_objs as go
 
 
 class DataPage:
@@ -14,9 +17,17 @@ class DataPage:
     }
     datadir = 'data'
 
+    def __init__(self, area, filters=None):
+        self.area = area
+        self.filters = filters
+        self.data = self._fetch_data()
 
     def _fetch_data(self):
-        pass
+        f = f"./data/election/{self.area['code']}.json"
+        if os.path.exists(f):
+            with open(f) as a:
+                return json.load(a)
+        return None
 
 
     def header(self):
@@ -49,6 +60,12 @@ class DataPage:
                 dcc.Link(
                     className='b pa0 ma0 yellow link dim underline',
                     href=f'/area/{self.area["code"]}',
+                    children="Home",
+                ),
+                " · ",
+                dcc.Link(
+                    className='b pa0 ma0 yellow link dim underline',
+                    href=f'/area/{self.area["code"]}/elections',
                     children="Election",
                 ),
                 " · ",
@@ -72,11 +89,79 @@ class DataPage:
             ]),
         ]
 
+    def _population_chart(self):
+
+        data = [
+            ("65+", self.data.get("65_plus_17")),
+            ("16-65", self.data.get("16_64_2017")),
+            ("Under 16", self.data.get("0_15_2017")),
+        ]
+
+        return self.show_figure(
+            dcc.Graph(
+                figure=go.Figure(
+                    data=[
+                        go.Bar(
+                            x=[i[1] for i in data],
+                            y=[i[0] for i in data],
+                            text=["{} ({:,.0f})".format(*i) for i in data],
+                            textposition='auto',
+                            orientation='h',
+                            hoverinfo='none',
+                            marker=dict(
+                                color='#0D8000'
+                            ),
+                        )
+                    ],
+                    layout=go.Layout(
+                        paper_bgcolor='rgba(0,0,0,0)',
+                        plot_bgcolor='rgba(0,0,0,0)',
+                        showlegend=False,
+                        margin=go.layout.Margin(l=0, r=0, t=0, b=0),
+                        xaxis=dict(
+                            visible=False,
+                            rangemode='tozero',
+                            showgrid=False,
+                        ),
+                        yaxis=dict(
+                            visible=False,
+                            showgrid=False,
+                            automargin=True,
+                        ),
+                    ),
+                ),
+                config=dict(
+                    displayModeBar=False,
+                ),
+                style={'height': 30 * len(data), 'width': '100%'},
+                id='vote-at-previous',
+            ),
+            'Local population'
+        )
+
+
     def sidebar(self):
-        return []
+        return [
+            dcc.Markdown(f'''
+**{self.area["name"]}** is a {self.areatype_names.get(self.area["type"], self.area["type"])} located in {self.data.get('ukpart')}.
+It has a population of {self.data.get("pop17"):,.0f} across an area of {self.data.get("sq_mi"):,.0f} square miles.
+            '''),
+            self._population_chart(),
+            # html.Pre(json.dumps(self.data, indent=4))
+        ]
 
     def map(self):
-        return []
+        return html.Figure(className='ma0 pa0 h-100', children=[
+            # html.Figcaption('Map of charities'),
+            html.Iframe(
+                src=f'/map/{self.area["code"]}',
+                style={
+                    'border': 0,
+                    'width': '100%',
+                    'height': '100%',
+                }
+            ),
+        ])
 
     def map_params(self, request):
         return dict()

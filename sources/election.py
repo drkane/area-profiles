@@ -165,7 +165,7 @@ class ElectionData(DataPage):
         return html.Figure(className='ma0 pa0 h-100', children=[
             # html.Figcaption('Map of charities'),
             html.Iframe(
-                src=f'/map/{self.area["code"]}/charities?c={self.filters}',
+                src=f'/map/{self.area["code"]}',
                 style={
                     'border': 0,
                     'width': '100%',

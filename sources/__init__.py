@@ -16,7 +16,7 @@ def get_source_cls(subpage, areatype):
         return CompanyData
     elif subpage == "deprivation":
         return DeprivationData
-    elif subpage in [None, 'elections'] and areatype == 'pcon':
+    elif subpage == "elections":
         return ElectionData
     else:
         return DataPage
