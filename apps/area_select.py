@@ -51,7 +51,9 @@ For each area you can view information about:
 - local charities
 - local large businesses with headquarters in the area
 
-It's a work in progress - I hope to add areas, more data sources and keep refining the site.
+The tool is made by [David Kane](https://dkane.net) and it's a work in progress - I hope to add areas, more data sources and keep refining the site.
+
+I've used Plotly's [Dash](https://dash.plot.ly/) and the maps are powered by [Leaflet](https://leafletjs.com/).
 
 ## Data sources
 
@@ -80,6 +82,9 @@ Data is used under open licences from a variety of places:
 ### Boundaries and geodata
 
 - geodata and boundaries are sourced from [ONS Geoportal](http://geoportal.statistics.gov.uk/)
+- Source: Office for National Statistics licensed under the Open Government Licence v.3.0
+- Contains OS data © Crown copyright and database right 2019
+- Map data for backgrounds is © OpenStreetMap contributors and imagery is created by mapbox
 
 
 Unless otherwise stated data is used under the Open Government Licence.

@@ -148,7 +148,8 @@ class CompanyData(DataPage):
 
     def attribution(self):
         return dcc.Markdown('''
-- sourced from the [gender pay gap data](https://gender-pay-gap.service.gov.uk/) released by government
+- Sourced from the [gender pay gap data](https://gender-pay-gap.service.gov.uk/) released by government
+- Company addresses are based on their registered office - for many companies most employees may be based outside of this area 
             ''')
 
     def map(self):
