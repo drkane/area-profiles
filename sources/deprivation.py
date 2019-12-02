@@ -17,7 +17,7 @@ class DeprivationData(DataPage):
 
     subpage = 'deprivation'
     IMD_2019_URL = 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/845345/File_7_-_All_IoD2019_Scores__Ranks__Deciles_and_Population_Denominators_3.csv'
-    size_order = [1,2,3,4,5,6,7,8,9,10]
+    size_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     def __init__(self, area, filters=None):
         self.area = area
