@@ -21,8 +21,8 @@ def layout(area_code, subpage=None):
                 dcc.Store(id='subpage', data=subpage),
                 html.Div(className='fl w-100 w-third-ns pa2', children=[
                     html.Div(id='main-display'),
-                    html.Div(className='bg-light-gray pa2', children=[
-                        html.H3(className='mv2 pa0 f4 header-font b', children='Data sources'),
+                    html.Div(className='bg-light-gray gray pa2 f6', children=[
+                        html.H3(className='mv2 pa0 f5 header-font b', children='Data sources'),
                         html.Div(id='attribution'),
                     ]),
                 ]),

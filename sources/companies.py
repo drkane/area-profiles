@@ -149,6 +149,7 @@ class CompanyData(DataPage):
     def attribution(self):
         return dcc.Markdown('''
 - Sourced from the [gender pay gap data](https://gender-pay-gap.service.gov.uk/) released by government
+- Only includes companies with more than 250 employees (smaller companies are not required to report gender pay gap data)
 - Company addresses are based on their registered office - for many companies most employees may be based outside of this area 
             ''')
 

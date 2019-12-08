@@ -45,7 +45,7 @@ class CharityData(DataPage):
                     html.A(
                         className='link underline-hover near-black',
                         children=correct_titlecase(char[1]["name"]),
-                        href=f'https://beta.charitycommission.gov.uk/charity-details/?regId={char[0]}&subId=0',
+                        href=self.get_url(char[0]),
                         target="_blank"
                     ),
                     " ",
@@ -56,7 +56,7 @@ class CharityData(DataPage):
                 ])
                 for k, char in enumerate(data["top"].items())
             ]),
-            'Largest charities'
+            'Largest local charities'
         )
 
     def _fig_spendingchart(self):
@@ -108,7 +108,7 @@ class CharityData(DataPage):
                 html.Strong(className='f3 lh-copy pa0 ma0 header-font',
                             children="{:,.0f}".format(data["charities"])),
                 html.Span(className='f5 lh-copy pa0 ma0',
-                          children=' charities')
+                          children=' local charities')
             ]),
             html.Div([
                 html.Strong(className='f3 lh-copy pa0 ma0 header-font', children='£{}'.format(
@@ -116,7 +116,7 @@ class CharityData(DataPage):
                         data["financial"].items())[-1][1]["spending"])
                 )),
                 html.Br(),
-                html.Span(className='f5 lh-copy pa0 ma0', children=' total spending by charities in {}'.format(
+                html.Span(className='f5 lh-copy pa0 ma0', children=' total spending by local charities in {}'.format(
                     list(data["financial"].items())[-1][0]
                 ))
             ]),
@@ -132,6 +132,9 @@ class CharityData(DataPage):
 
     def attribution(self):
         return dcc.Markdown('''
+Shows only charities that look like they work in the local area (excluding national and international charities).
+Independent schools and universities have been excluded where possible.
+
 - from the [Charity Commission](https://beta.charitycommission.gov.uk/), [OSCR](https://www.oscr.org.uk/) 
   and [CCNI](https://www.charitycommissionni.org.uk/). 
 - Also includes [some of my own data](https://github.com/drkane/charity-lookups) on charities.
@@ -166,6 +169,15 @@ class CharityData(DataPage):
                 }
             }
         )
+
+    @staticmethod
+    def get_url(regno):
+        if regno.startswith('SC'):
+            return 'https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={}'.format(regno.replace('SC', ''))
+        if regno.startswith('NI'):
+            return 'https://www.charitycommissionni.org.uk/charity-details/?regId={}&subId=0'.format(regno.replace('NI', ''))
+        return "https://beta.charitycommission.gov.uk/charity-details/?regId={}&subId=0".format(regno)
+
 
     @classmethod
     def import_data(cls, datadir=None):
