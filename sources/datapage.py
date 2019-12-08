@@ -5,16 +5,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
+from apps.data import AREA_TYPES
+
 
 class DataPage:
 
     subpage = ''
-    areatype_names = {
-        'pcon': 'Parliamentary Constituency',
-        'la': 'Local Authority',
-        'la_upper': 'Local Authority',
-        'la_lower': 'Local Authority',
-    }
     datadir = 'data'
 
     def __init__(self, area, filters=None, datadir='./data'):
@@ -46,7 +42,7 @@ class DataPage:
                 html.A(className='link moon-gray underline-yellow underline', children=self.area["name"]),
             ]),
             html.H3(className='f3-ns f3 lh-solid mv3', children=[
-                self.areatype_names.get(self.area["type"], self.area["type"]),
+                AREA_TYPES.get(self.area["type"], self.area["type"]),
                 " | ",
                 self.area["code"],
             ]),
@@ -144,7 +140,7 @@ class DataPage:
     def sidebar(self):
         return [
             dcc.Markdown(f'''
-**{self.area["name"]}** is a {self.areatype_names.get(self.area["type"], self.area["type"])} located in {self.data.get('ukpart')}.
+**{self.area["name"]}** is a {AREA_TYPES.get(self.area["type"], self.area["type"]).lower()} located in {self.data.get('ukpart')}.
 It has a population of {self.data.get("pop17"):,.0f} across an area of {self.data.get("sq_mi"):,.0f} square miles.
             '''),
             self._population_chart(),

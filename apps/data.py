@@ -3,6 +3,13 @@ import json
 
 from flask import current_app
 
+AREA_TYPES = {
+    'pcon': 'Parliamentary Constituency',
+    'la': 'Local Authority',
+    'la_upper': 'Local Authority',
+    'la_lower': 'Local Authority',
+}
+
 def fetch_area(area_code):
     areas = fetch_areas()
     area = [a for a in areas if a['code'] == area_code]

@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 from dash.dependencies import Input, Output, State
 
 from app import app
-from .data import fetch_areas
+from .data import fetch_areas, AREA_TYPES
 
 areas = fetch_areas(app.server.config['DATA_DIR'])
 
@@ -33,7 +33,8 @@ layout = [
             dcc.Dropdown(
                 id='area-selection',
                 options=[
-                    {"label": f"{a['name']} ({a['type']})", "value": a["code"]}
+                    {"label": f"{a['name']} ({AREA_TYPES.get(a['type'], a['type'])})",
+                     "value": a["code"]}
                     for a in areas
                 ]
             ),
