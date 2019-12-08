@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, current_app
 
 from sources import get_source_cls
 from .data import fetch_area, get_boundary
@@ -12,7 +12,8 @@ maps = Blueprint('maps', __name__,
 def show(area_code, subpage=None):
 
     area = fetch_area(area_code)
-    data = get_source_cls(subpage, area['type'])(area)
+    data = get_source_cls(subpage, area['type'])(
+        area, datadir=current_app.config['DATA_DIR'])
 
     params = dict(
         access_token='pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',

@@ -9,8 +9,8 @@ import plotly.graph_objs as go
 # from dash.dependencies import Input, Output, State
 from tqdm import tqdm
 
-from .datapage import DataPage
 from apps.utils import correct_titlecase
+from .datapage import DataPage
 
 
 class DeprivationData(DataPage):
@@ -22,11 +22,11 @@ class DeprivationData(DataPage):
     def __init__(self, area, filters=None, datadir='./data'):
         self.area = area
         self.filters = filters
-        self.data = self._fetch_data()
         self.datadir = datadir
+        self.data = self._fetch_data()
 
     def _fetch_data(self):
-        f = os.path.join(self.datadir, f"deprivation/{self.area['code']}.json")
+        f = os.path.join(self.datadir, self.subpage, f"{self.area['code']}.json")
         if os.path.exists(f):
             with open(f) as a:
                 return json.load(a)

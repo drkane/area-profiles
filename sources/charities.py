@@ -17,12 +17,12 @@ class CharityData(DataPage):
     def __init__(self, area, filters=None, datadir='./data'):
         self.area = area
         self.filters = self._set_filters(filters)
-        self.data = self._fetch_data()
         self.datadir = datadir
+        self.data = self._fetch_data()
 
 
     def _fetch_data(self):
-        f = os.path.join(self.datadir, f"charities/{self.area['code']}.json")
+        f = os.path.join(self.datadir, self.subpage, f"{self.area['code']}.json")
         if os.path.exists(f):
             with open(f) as a:
                 return json.load(a)
@@ -152,6 +152,8 @@ class CharityData(DataPage):
         ])
 
     def map_params(self, request):
+        print(self.data)
+        print(self.filters)
         topchar = list(self.data[self.filters]["top"].keys())
         return dict(
             config_type=self.filters,
