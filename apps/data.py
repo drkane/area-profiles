@@ -12,11 +12,9 @@ def fetch_area(area_code):
 
 
 def fetch_areas(datadir=None):
-    print(datadir)
     if datadir is None:
         datadir = current_app.config.get('DATA_DIR', './data')
     areas_file = os.path.join(datadir, 'areas.json')
-    print(areas_file)
     if os.path.exists(areas_file):
         with open(areas_file) as areas_file_:
             return json.load(areas_file_)["areas"]

@@ -25,6 +25,7 @@ class DataPage:
 
     def _fetch_data(self):
         f = os.path.join(self.datadir, f"election/{self.area['code']}.json")
+        print(f)
         if os.path.exists(f):
             with open(f) as a:
                 return json.load(a)
