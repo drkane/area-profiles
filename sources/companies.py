@@ -26,14 +26,14 @@ class CompanyData(DataPage):
         "20,000 or more",
     ]
 
-    def __init__(self, area, filters=None):
+    def __init__(self, area, filters=None, datadir='./data'):
         self.area = area
         self.filters = filters
         self.data = self._fetch_data()
-
+        self.datadir = datadir
 
     def _fetch_data(self):
-        f = f"./data/companies/{self.area['code']}.json"
+        f = os.path.join(self.datadir, f"companies/{self.area['code']}.json")
         if os.path.exists(f):
             with open(f) as a:
                 return json.load(a)

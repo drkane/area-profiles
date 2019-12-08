@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output, State
 from app import app
 from .data import fetch_areas
 
-areas = fetch_areas()
+areas = fetch_areas(app.server.config['DATA_DIR'])
 
 layout = [
     html.Header(id='area-header',

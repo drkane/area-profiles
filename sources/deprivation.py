@@ -19,14 +19,14 @@ class DeprivationData(DataPage):
     IMD_2019_URL = 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/845345/File_7_-_All_IoD2019_Scores__Ranks__Deciles_and_Population_Denominators_3.csv'
     size_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    def __init__(self, area, filters=None):
+    def __init__(self, area, filters=None, datadir='./data'):
         self.area = area
         self.filters = filters
         self.data = self._fetch_data()
-
+        self.datadir = datadir
 
     def _fetch_data(self):
-        f = f"./data/deprivation/{self.area['code']}.json"
+        f = os.path.join(self.datadir, f"deprivation/{self.area['code']}.json")
         if os.path.exists(f):
             with open(f) as a:
                 return json.load(a)

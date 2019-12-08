@@ -1,3 +1,4 @@
+import os
 import flask
 import dash
 
@@ -10,6 +11,9 @@ external_stylesheets = [
 ]
 
 server = flask.Flask(__name__, static_url_path='/static')
+server.config.update(
+    DATA_DIR=os.environ.get('DATA_DIR', './data')
+)
 server.register_blueprint(maps, url_prefix='/map')
 server.cli.add_command(import_data)
 

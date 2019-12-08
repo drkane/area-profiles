@@ -44,7 +44,7 @@ def layout(area_code, subpage=None):
      Input('subpage', 'data')])
 def display_value(area, subpage):
 
-    data = get_source_cls(subpage, area['type'])(area)
+    data = get_source_cls(subpage, area['type'])(area, datadir=app.server.config['DATA_DIR'])
 
     return (
         data.header(),

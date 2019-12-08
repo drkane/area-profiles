@@ -1,4 +1,5 @@
-from flask.cli import AppGroup
+from flask.cli import AppGroup, with_appcontext
+from flask import current_app
 import click
 
 from .datapage import DataPage
@@ -25,14 +26,16 @@ import_cli = AppGroup('import')
 
 @click.command('import')
 @click.argument('subpage')
+@with_appcontext
 def import_data(subpage):
+    datadir = current_app.config.DATA_DIR
     if subpage == 'charities':
-        CharityData.import_data()
+        CharityData.import_data(datadir=datadir)
     elif subpage == 'election':
-        ElectionData.import_data()
+        ElectionData.import_data(datadir=datadir)
     elif subpage == 'companies':
-        CompanyData.import_data()
+        CompanyData.import_data(datadir=datadir)
     elif subpage == 'deprivation':
-        DeprivationData.import_data()
+        DeprivationData.import_data(datadir=datadir)
     elif subpage == 'boundaries':
-        fetch_boundaries('./data/boundaries')
+        fetch_boundaries(datadir=datadir)

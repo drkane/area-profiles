@@ -13,7 +13,9 @@ GEO_URLS = dict(
     lsoa=('https://opendata.arcgis.com/datasets/da831f80764346889837c72508f046fa_2.geojson', 'lsoa11'),
 )
 
-def fetch_boundaries(datadir):
+def fetch_boundaries(datadir='./data'):
+
+    datadir = os.path.join(datadir, 'boundaries')
 
     # fetch the boundary data
     print("fetching boundaries")

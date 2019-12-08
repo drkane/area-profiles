@@ -15,14 +15,15 @@ class ElectionData(DataPage):
     WPC_URL = 'https://raw.githubusercontent.com/alasdairrae/wpc/master/files/wpc_2019_flat_file_v9.csv'
     DEMOCLUB_URL = 'https://candidates.democracyclub.org.uk/media/candidates-parl.2019-12-12.csv'
 
-    def __init__(self, area, filters=None):
+    def __init__(self, area, filters=None, datadir='./data'):
         self.area = area
         self.filters = filters
         self.data = self._fetch_data()
+        self.datadir = datadir
 
 
     def _fetch_data(self):
-        f = f"./data/election/{self.area['code']}.json"
+        f = os.path.join(self.datadir, f"election/{self.area['code']}.json")
         if os.path.exists(f):
             with open(f) as a:
                 return json.load(a)

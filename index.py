@@ -28,7 +28,7 @@ def display_page(pathname):
 
     if path_vars is None:
         return area_select.layout
-    
+
     path_vars = path_vars.groupdict()
     page_type = path_vars.get('page_type')
     area_code = path_vars.get('area_code')
