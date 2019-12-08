@@ -8,8 +8,8 @@ import dash_html_components as html
 import plotly.graph_objs as go
 # from dash.dependencies import Input, Output, State
 
-from .datapage import DataPage
 from apps.utils import correct_titlecase
+from .datapage import DataPage
 
 
 class CompanyData(DataPage):

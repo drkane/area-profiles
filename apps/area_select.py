@@ -1,7 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.graph_objs as go
-from dash.dependencies import Input, Output, State
+# import plotly.graph_objs as go
+from dash.dependencies import Input, Output #, State
 
 from app import app
 from .data import fetch_areas, AREA_TYPES
@@ -9,7 +9,7 @@ from .data import fetch_areas, AREA_TYPES
 areas = fetch_areas(app.server.config['DATA_DIR'])
 
 areagroups = {
-    a['type']: [b for b in areas if b['type']==a['type']]
+    a['type']: [b for b in areas if b['type'] == a['type']]
     for a in areas
 }
 

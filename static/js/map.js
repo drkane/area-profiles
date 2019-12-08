@@ -96,16 +96,16 @@ if (lsoa_fill) {
         // function which works out the colour of a area
         var getDecileColour = function (value){
             var colours = [
-                "#0D8000",
-                "#27830F",
-                "#42871E",
-                "#5D8B2D",
-                "#788F3C",
-                "#93934B",
-                "#AE975A",
-                "#C99B69",
-                "#E49F78",
-                "#FFA388",
+                "#0864A7",
+                "#0978C7",
+                "#2690CC",
+                "#4AADD2",
+                "#7DCBD8",
+                "#B0E1D6",
+                "#D3EED5",
+                "#E3F5D8",
+                "#EFFCCA",
+                "#FBFCB9",
             ]
             return colours[value];
         }

@@ -37,31 +37,36 @@ class DeprivationData(DataPage):
         data = [(k, c.get(k, 0)) for k in self.size_order]
 
         colours = [
-            "#0D8000",
-            "#27830F",
-            "#42871E",
-            "#5D8B2D",
-            "#788F3C",
-            "#93934B",
-            "#AE975A",
-            "#C99B69",
-            "#E49F78",
-            "#FFA388",
+            "#0864A7",
+            "#0978C7",
+            "#2690CC",
+            "#4AADD2",
+            "#7DCBD8",
+            "#B0E1D6",
+            "#D3EED5",
+            "#E3F5D8",
+            "#EFFCCA",
+            "#FBFCB9",
         ]
+
+        total = sum([i[1] for i in data])
 
         return self.show_figure(
             html.Div([
+                dcc.Markdown(className='f6', children='''
+Each bar shows the proportion of people living in LSOAs in each national deprivation decile.
+'''),
                 html.Div(className='f7', children='Least deprived'),
                 dcc.Graph(
                     figure=go.Figure(
                         data=[
                             go.Bar(
-                                x=[i[1] for i in data],
+                                x=[i[1] / total for i in data],
                                 y=[i[0] for i in data],
                                 text=[
-                                    "{:,.0f}{}".format(
-                                        i[1],
-                                        " people" if i[0] == 10 else ""
+                                    "{:,.1%}".format(
+                                        i[1] / total,
+                                        # " people" if i[0] == 10 else ""
                                     )
                                     for i in data
                                 ],
@@ -98,7 +103,7 @@ class DeprivationData(DataPage):
                 ),
                 html.Div(className='f7', children='Most deprived'),
             ]),
-            'Population by levels of deprivation'
+            'Levels of deprivation'
         )
 
 
@@ -147,6 +152,13 @@ class DeprivationData(DataPage):
     def attribution(self):
         return dcc.Markdown('''
 - the [Index of Multiple Deprivation](https://www.gov.uk/government/statistics/english-indices-of-deprivation-2019) published by MHCLG
+
+The colours on the map indicate the deprivation decile of each Lower Layer Super Output Area (LSOA)
+for England as a whole, and the coloured bars indicate the number of people living in LSOAs in each national
+deprivation decile. The most deprived areas (decile 1) are shown in blue.
+
+It is important to keep in mind that the Indices of Deprivation relate to small areas and do not tell us
+how deprived, or wealthy, individual people area. LSOAs have an average population of just under 1,700 (as of 2017).
             ''')
 
 
