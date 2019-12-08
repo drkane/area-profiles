@@ -8,6 +8,11 @@ from .data import fetch_areas, AREA_TYPES
 
 areas = fetch_areas(app.server.config['DATA_DIR'])
 
+areagroups = {
+    a['type']: [b for b in areas if b['type']==a['type']]
+    for a in areas
+}
+
 layout = [
     html.Header(id='area-header',
                 className="body header-font ph3 ph3-ns pt3 pt3-ns pb3 moon-gray cf center mw9 w-100",
@@ -29,15 +34,18 @@ layout = [
                 ]),
     html.Div(className='bg-white h-100', children=[
         html.Div(className='w-100 mw7-ns pa2 flex-auto center', children=[
-            html.H1(className='f3 lh-solid mv3 header-font', children='Parliamentary constituencies'),
-            dcc.Dropdown(
-                id='area-selection',
-                options=[
-                    {"label": f"{a['name']} ({AREA_TYPES.get(a['type'], a['type'])})",
-                     "value": a["code"]}
-                    for a in areas
-                ]
-            ),
+            html.Div([
+                html.H1(className='f3 lh-solid mv3 header-font', children=AREA_TYPES.get(atype, atype)),
+                dcc.Dropdown(
+                    id='area-selection',
+                    options=[
+                        {"label": f"{a['name']}", "value": a["code"]}
+                        for a in areas_
+                    ]
+                )
+            ])
+            for atype, areas_ in areagroups.items()
+        ] + [
             html.H1(className='f3 lh-solid mb3 mt5 header-font',
                     children='About this tool'),
             dcc.Markdown(className='entry-content', children='''
