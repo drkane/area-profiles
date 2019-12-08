@@ -7,6 +7,7 @@ from .charities import CharityData
 from .election import ElectionData
 from .companies import CompanyData
 from .deprivation import DeprivationData
+from .housing import HousingData
 from .boundaries import fetch_boundaries
 
 def get_source_cls(subpage, areatype):
@@ -19,6 +20,8 @@ def get_source_cls(subpage, areatype):
         return DeprivationData
     elif subpage == "elections":
         return ElectionData
+    elif subpage == "housing":
+        return HousingData
     else:
         return DataPage
 
@@ -28,7 +31,7 @@ import_cli = AppGroup('import')
 @click.argument('subpage')
 @with_appcontext
 def import_data(subpage):
-    datadir = current_app.config.DATA_DIR
+    datadir = current_app.config.get('DATA_DIR', './data')
     if subpage == 'charities':
         CharityData.import_data(datadir=datadir)
     elif subpage == 'election':
@@ -37,5 +40,7 @@ def import_data(subpage):
         CompanyData.import_data(datadir=datadir)
     elif subpage == 'deprivation':
         DeprivationData.import_data(datadir=datadir)
+    elif subpage == 'housing':
+        HousingData.import_data(datadir=datadir)
     elif subpage == 'boundaries':
         fetch_boundaries(datadir=datadir)

@@ -1,5 +1,6 @@
 import json
 import os
+import io
 from collections import defaultdict
 import random
 
@@ -8,15 +9,16 @@ import dash_html_components as html
 import plotly.graph_objs as go
 # from dash.dependencies import Input, Output, State
 from tqdm import tqdm
+import requests
 
 from apps.utils import correct_titlecase
 from .datapage import DataPage
 
 
-class DeprivationData(DataPage):
+class HousingData(DataPage):
 
-    subpage = 'deprivation'
-    IMD_2019_URL = 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/845345/File_7_-_All_IoD2019_Scores__Ranks__Deciles_and_Population_Denominators_3.csv'
+    subpage = 'housing'
+    PRICE_PAID_URL = 'https://www.ons.gov.uk/file?uri=%2fpeoplepopulationandcommunity%2fhousing%2fdatasets%2fmedianpricepaidbylowerlayersuperoutputareahpssadataset46%2fcurrent/hpssadataset46medianpricepaidforresidentialpropertiesbylsoa.xls'
     size_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     def __init__(self, area, filters=None, datadir='./data'):
@@ -166,7 +168,8 @@ how deprived, or wealthy, individual people area. LSOAs have an average populati
     def import_data(cls, datadir=None):
         import pandas as pd
 
-        df = pd.read_csv(cls.IMD_2019_URL, index_col="LSOA code (2011)")
+        r = requests.get(cls.PRICE_PAID_URL)
+        df = pd.read_excel(io.BytesIO(r.content), skiprows=5, sheet_name='Data', index_col="LSOA code")
 
         if datadir is None:
             datadir = cls.datadir

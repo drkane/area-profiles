@@ -217,7 +217,9 @@ class CompanyData(DataPage):
         )
 
         if datadir is None:
-            datadir = os.path.join(cls.datadir, cls.subpage)
+            datadir = cls.datadir
+
+        datadir = os.path.join(datadir, cls.subpage)
 
         if not os.path.exists(datadir):
             os.mkdir(datadir)
