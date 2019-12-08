@@ -10,20 +10,12 @@ from .deprivation import DeprivationData
 from .housing import HousingData
 from .boundaries import fetch_boundaries
 
+classes = [CharityData, CompanyData, DeprivationData, ElectionData, HousingData]
+classes = {c.subpage: c for c in classes}
+
 def get_source_cls(subpage, areatype):
 
-    if subpage == "charities":
-        return CharityData
-    elif subpage == "companies":
-        return CompanyData
-    elif subpage == "deprivation":
-        return DeprivationData
-    elif subpage == "elections":
-        return ElectionData
-    elif subpage == "housing":
-        return HousingData
-    else:
-        return DataPage
+    return classes.get(subpage, DataPage)
 
 import_cli = AppGroup('import')
 
@@ -32,15 +24,7 @@ import_cli = AppGroup('import')
 @with_appcontext
 def import_data(subpage):
     datadir = current_app.config.get('DATA_DIR', './data')
-    if subpage == 'charities':
-        CharityData.import_data(datadir=datadir)
-    elif subpage == 'election':
-        ElectionData.import_data(datadir=datadir)
-    elif subpage == 'companies':
-        CompanyData.import_data(datadir=datadir)
-    elif subpage == 'deprivation':
-        DeprivationData.import_data(datadir=datadir)
-    elif subpage == 'housing':
-        HousingData.import_data(datadir=datadir)
-    elif subpage == 'boundaries':
+    if subpage == 'boundaries':
         fetch_boundaries(datadir=datadir)
+    else:
+        c = classes.get(subpage, DataPage).import_data(datadir=datadir)

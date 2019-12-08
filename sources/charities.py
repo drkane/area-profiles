@@ -155,8 +155,6 @@ Independent schools and universities have been excluded where possible.
         ])
 
     def map_params(self, request):
-        print(self.data)
-        print(self.filters)
         topchar = list(self.data[self.filters]["top"].keys())
         return dict(
             config_type=self.filters,
