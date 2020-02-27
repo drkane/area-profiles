@@ -1,7 +1,7 @@
 ## Copy files to server
 
 ```
-scp -r ./data/ root@ip-address:/var/lib/dokku/data/storage/areaprofiles
+scp -r ./data/ root@ip-address:/var/lib/dokku/data/storage/areas
 ```
 
 ## dokku configuration
