@@ -1,0 +1,5 @@
+libgeos-dev
+libproj-dev
+gdal-bin
+libgdal-dev
+python-gdal
