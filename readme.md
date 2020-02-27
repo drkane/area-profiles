@@ -13,5 +13,6 @@ mkdir -p  /var/lib/dokku/data/storage/areas
 chown -R dokku:dokku /var/lib/dokku/data/storage/areas
 chown -R 32767:32767 /var/lib/dokku/data/storage/areas
 dokku storage:mount areas /var/lib/dokku/data/storage/areas:/app/storage
-dokku config:set areas DATA_DIR='/app/storage'
+dokku config:set areas DATA_DIR='/app/storage/data'
+dokku config:set areas BUILD_WITH_GEO_LIBRARIES=1
 ```
